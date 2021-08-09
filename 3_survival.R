@@ -11,17 +11,17 @@ options(scipen=999)
 
 # load comprehensive mark data set (all fish tagged at RST with predicted length at marine entry)
 ### individual fish are identified by PIT tag number
-dat_rst <-readRDS("1_data/processed/dat_rst_mar.rds") 
+dat_rst <-readRDS("dat_rst_mar.rds") 
 
 # load comprehensive mark-recapture data set (only tagged fish that were recaptured in the estuary)
 ### individual fish are identified by PIT tag number
 ### columns preceded by "tag_" indicate initial mark data
 ### columns preceded by "rc_" indicate recapture data
-dat_rc <- readRDS("1_data/processed/dat_rc.rds")
+dat_rc <- readRDS("dat_rc.rds")
 
 # load comprehensive marine survival data set (all fish tagged at RST with adult survival data from RFID array detections)
 ### 0 = died, 1 = redetected as adult 
-dat_surv <- readRDS("1_data/processed/dat_surv.rds")
+dat_surv <- readRDS("dat_surv.rds")
 
 # CHECK: SIZE-SELECTIVE MORTALITY BETWEEN FRESHWATER EXIT AND MARINE ENTRY ####
 ### Kolmogorov-Smirnov tests to check for annual differences in the freshwater exit size distribution for 1) all individuals tagged at the RST and 2) the subset of individuals recaptured in the estuary 
@@ -186,12 +186,12 @@ surv_pred_18$lower <- surv_pred_18$fit - (1.96*surv_pred_18$se.fit)
 surv_pred_18$upper <- surv_pred_18$fit + (1.96*surv_pred_18$se.fit) 
 
 # SAVE DATA, MODELS, AND PREDICTIONS ####
-saveRDS(dat, "1_data/processed/dat_surv_obs_pred.rds")
-saveRDS(mod_l_y_est, "2_analyses/0_final/mod_surv.rds")
-saveRDS(surv_obs_17, "2_analyses/0_final/surv_obs_17.rds")
-saveRDS(surv_obs_18, "2_analyses/0_final/surv_obs_18.rds")
-saveRDS(surv_pred_17, "2_analyses/0_final/surv_pred_17.rds")
-saveRDS(surv_pred_18, "2_analyses/0_final/surv_pred_18.rds")
+saveRDS(dat, "dat_surv_obs_pred.rds")
+saveRDS(mod_l_y_est, "mod_surv.rds")
+saveRDS(surv_obs_17, "surv_obs_17.rds")
+saveRDS(surv_obs_18, "surv_obs_18.rds")
+saveRDS(surv_pred_17, "surv_pred_17.rds")
+saveRDS(surv_pred_18, "surv_pred_18.rds")
 
 # TABLE 1: MARINE SURVIVAL MODEL EFFECT SIZES, CONFIDENCE INTERVALS, P-VALUES ####
 # run model without intercept (for interpretability)
@@ -291,5 +291,5 @@ fig_6 <- ggplot(p_surv_obs) +
 fig_6
 
 # save marine survival plot
-ggsave("3_plots/0_final/fig_6.pdf", dpi = 300, height = 4.5, width = 6, units = "in")
+ggsave("fig_6.pdf", dpi = 300, height = 4.5, width = 6, units = "in")
 

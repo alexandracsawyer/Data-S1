@@ -12,16 +12,16 @@ options(scipen=999)
 ### individual fish are identified by PIT tag number
 ### columns preceded by "tag_" indicate initial mark data
 ### columns preceded by "rc_" indicate recapture data
-dat_rc <- readRDS("1_data/processed/dat_rc.rds")
+dat_rc <- readRDS("dat_rc.rds")
 rownames(dat_rc) <- c()
 
 # load comprehensive mark data set (all fish that were tagged at the RST)
 ### individual fish are identified by PIT tag number
-dat_rst <- readRDS("1_data/processed/dat_rst.rds")
+dat_rst <- readRDS("dat_rst.rds")
 rownames(dat_rst) <- c()
 
 # LOAD ESTUARY RESIDENCE MODEL ####
-mod_res <- readRDS("2_analyses/0_final/mod_res_glm.rds")
+mod_res <- readRDS("mod_res_glm.rds")
 
 # PREPARE DATA FOR GROWTH RATE MODELS ####
 # mark-recapture data set 
@@ -112,8 +112,8 @@ dat_rst$pred_growth_sd <- sqrt((pred_growth_d$sd/pred_growth_d$fit.fit)^2 + (dat
 dat_rst$pred_length <- dat_rst$tag_length + dat_rst$pred_growth
 
 # SAVE DATA ####
-saveRDS(mod_growth_y, "2_analyses/0_final/mod_growth_d.rds")
-saveRDS(dat_rst, "1_data/processed/dat_rst_mar.rds")
+saveRDS(mod_growth_y, "mod_growth_d.rds")
+saveRDS(dat_rst, "dat_rst_mar.rds")
 
 # FIGURE 4: ANNUAL ESTUARY GROWTH RATES ####
 # create growth data frame for easy plotting
@@ -153,7 +153,7 @@ fig_4 <- ggplot() +
 fig_4
 
 # save estuary growth plot
-ggsave("3_plots/0_final/fig_4.pdf", dpi = 300, height = 3, width = 3, units = "in")
+ggsave("fig_4.pdf", dpi = 300, height = 3, width = 3, units = "in")
 
 # FIGURE 5: SIZE AT MARINE ENTRY ####
 # create annual rst data sets
@@ -273,5 +273,5 @@ fig_5 <- p_2017 / p_2018 / p_2019
 fig_5
 
 # save size at marine entry plot
-ggsave("3_plots/0_final/fig_5.pdf", dpi = 300, height = 4.5, width = 6, units = "in")
+ggsave("fig_5.pdf", dpi = 300, height = 4.5, width = 6, units = "in")
 
