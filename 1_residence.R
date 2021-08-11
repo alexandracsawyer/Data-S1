@@ -245,7 +245,7 @@ days_nb_l$upr <- exp(days_nb_l$upr) # exponentiate upper 95% CI
 
 # SAVE BEST-FIT MODEL AND MODEL PREDICTIONS ####
 saveRDS(mod_nb_l, "mod_res_glm.rds")
-saveRDS(days_nb_l, "days_res_glm.rds")
+write.csv(days_nb_l, "days_res_glm.csv")
 
 # FIGURE 3: ESTUARY RESIDENCE ####
 # establish plot inputs
