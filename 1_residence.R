@@ -11,7 +11,7 @@ options(scipen=999)
 ### individual fish are identified by PIT tag number
 ### columns preceded by "tag_" indicate initial mark data
 ### columns preceded by "rc_" indicate recapture data
-dat_rc <- readRDS("dat_rc.rds")
+dat_rc <- read.csv("dat_rc.csv")
 rownames(dat_rc) <- c()
 
 # create Reach 1 mark-recapture data set
