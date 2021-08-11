@@ -12,12 +12,12 @@ options(scipen=999)
 ### individual fish are identified by PIT tag number
 ### columns preceded by "tag_" indicate initial mark data
 ### columns preceded by "rc_" indicate recapture data
-dat_rc <- readRDS("dat_rc.rds")
+dat_rc <- read.csv("dat_rc.csv")
 rownames(dat_rc) <- c()
 
 # load comprehensive mark data set (all fish that were tagged at the RST)
 ### individual fish are identified by PIT tag number
-dat_rst <- readRDS("dat_rst.rds")
+dat_rst <- read.csv("dat_rst.csv")
 rownames(dat_rst) <- c()
 
 # LOAD ESTUARY RESIDENCE MODEL ####
@@ -33,16 +33,10 @@ dat_rc <- subset(dat_rc, tag_loc == "smolt trap")
 plot(dat_rc$growth_d)
 dat_rc <- dat_rc[-which(dat_rc$growth_d > 2),] 
 
-### drop unused tag year factors
-dat_rc$tag_year <- droplevels(dat_rc$tag_year) 
-
 ### keep only columns relevant for analyses
 dat_rc <- dat_rc[,c("PIT_number", "tag_year", "tag_doy", "tag_length", "rc_doy", "rc_length", "days", "growth", "growth_d")] 
 
 # RST data set
-### drop unused tag year factors
-dat_rst$tag_year <- droplevels(dat_rst$tag_year)
-
 ### keep only columns relevant for analyses
 ### adjust row and column names for consistency with small data set
 dat_rst <- dat_rst[,c("PIT_number", "tag_year", "doy", "length")]
@@ -113,7 +107,7 @@ dat_rst$pred_length <- dat_rst$tag_length + dat_rst$pred_growth
 
 # SAVE DATA ####
 saveRDS(mod_growth_y, "mod_growth_d.rds")
-saveRDS(dat_rst, "dat_rst_mar.rds")
+write.csv(dat_rst, "dat_rst_mar.csv", row.names = F)
 
 # FIGURE 4: ANNUAL ESTUARY GROWTH RATES ####
 # create growth data frame for easy plotting

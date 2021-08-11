@@ -11,13 +11,15 @@ options(scipen=999)
 ### individual fish are identified by PIT tag number
 ### columns preceded by "tag_" indicate initial mark data
 ### columns preceded by "rc_" indicate recapture data
-dat_rc <- readRDS("dat_rc.rds")
+dat_rc <- read.csv("dat_rc.csv")
 rownames(dat_rc) <- c()
+dat_rc$tag_year <- as.factor(dat_rc$tag_year)
 
 # load comprehensive initial mark data set (all fish that were tagged at the RST)
 ### individual fish are identified by PIT tag number
-dat_rst <- readRDS("dat_rst.rds")
+dat_rst <- read.csv("dat_rst.csv")
 rownames(dat_rst) <- c()
+dat_rst$tag_year <- as.factor(dat_rst$tag_year)
 
 # load day of year (DOY) data - this has adjusted DOY for different pooled data scenarios
 doy <- read.csv("date_adjust.csv")
@@ -32,11 +34,9 @@ sets_2019 <- subset(sets, year==2019)
 # PREPARE DATA FOR INDIVIDUAL ENCOUNTER HISTORY MATRIX ####
 # mark-recapture data set 
 dat_rc <- subset(dat_rc, tag_loc == "smolt trap") # keep only fish tagged at the RST
-dat_rc$tag_year <- droplevels(dat_rc$tag_year) # drop unused tag year factors
 dat_rc <- dat_rc[,c("PIT_number", "tag_year", "tag_doy", "tag_length", "rc_year", "rc_doy", "rc_length", "rc_loc_1", "rc_loc_2")] # keep only columns relevant for analyses
 
 # RST data set
-dat_rst$tag_year <- droplevels(dat_rst$tag_year) #drop unused tag year factors
 dat_rst <- dat_rst[,c("PIT_number", "tag_year", "doy", "location", "length")] # keep only columns relevant for analyses
 colnames(dat_rst) <- c("PIT_number", "tag_year", "tag_doy", "tag_loc", "tag_length") # adjust row and column names for consistency with mark-recapture data set
 
@@ -176,11 +176,11 @@ days_cjs
 
 # SAVE BEST-FIT MODEL AND MODEL PREDICTIONS ####
 saveRDS(mod_length_dot, file="mod_res_cjs.rds")
-saveRDS(days_cjs, "days_res_cjs.rds")
+write.csv(days_cjs, "days_res_cjs.csv")
 
 # FIGURE S1 - PANEL C: ESTUARY RESIDENCE (CJS MARK-RECAPTURE) ####
 # load recapture data
-dat_rc <- readRDS("dat_rc.rds")
+dat_rc <- read.csv("dat_rc.csv")
 dat_rc <- subset(dat_rc, tag_loc == "smolt trap") # keep only fish tagged at the RST
 
 # establish plot inputs

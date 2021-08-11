@@ -11,17 +11,17 @@ options(scipen=999)
 
 # load comprehensive mark data set (all fish tagged at RST with predicted length at marine entry)
 ### individual fish are identified by PIT tag number
-dat_rst <-readRDS("dat_rst_mar.rds") 
+dat_rst <-read.csv("dat_rst_mar.csv") 
 
 # load comprehensive mark-recapture data set (only tagged fish that were recaptured in the estuary)
 ### individual fish are identified by PIT tag number
 ### columns preceded by "tag_" indicate initial mark data
 ### columns preceded by "rc_" indicate recapture data
-dat_rc <- readRDS("dat_rc.rds")
+dat_rc <- read.csv("dat_rc.csv")
 
 # load comprehensive marine survival data set (all fish tagged at RST with adult survival data from RFID array detections)
 ### 0 = died, 1 = redetected as adult 
-dat_surv <- readRDS("dat_surv.rds")
+dat_surv <- read.csv("dat_surv.csv")
 
 # CHECK: SIZE-SELECTIVE MORTALITY BETWEEN FRESHWATER EXIT AND MARINE ENTRY ####
 ### Kolmogorov-Smirnov tests to check for annual differences in the freshwater exit size distribution for 1) all individuals tagged at the RST and 2) the subset of individuals recaptured in the estuary 

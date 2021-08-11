@@ -3,20 +3,20 @@ library(ggplot2)
 library(patchwork)
 
 # LOAD DATA ####
-dat_rst <- readRDS("dat_rst.rds")
-dat_rc <- readRDS("dat_rc.rds")
+dat_rst <- read.csv("dat_rst.csv")
+dat_rc <- read.csv("dat_rc.csv")
 
 # load negative binomial GLM model and predictions
 mod_res_glm <- readRDS("mod_res_glm.rds")
-days_res_glm <- readRDS("days_res_glm.rds")
+days_res_glm <- read.csv("days_res_glm.csv")
 
 # load 75% quantile regression model and predictions
 mod_res_qr <- readRDS("mod_res_qr.rds")
-days_res_qr <- readRDS("days_res_qr.rds")
+days_res_qr <- read.csv("days_res_qr.csv")
 
 # load CJS model
 mod_res_cjs <- readRDS("mod_res_cjs.rds")
-days_res_cjs <- readRDS("days_res_cjs.rds")
+days_res_cjs <- read.csv("days_res_cjs.csv")
 
 # TABLE S1: RESIDENCE MODEL PARAMETER ESTIMATES, RESIDENCE VALUES, CONFIDENCE INTERVALS ####
 #establish quantiles

@@ -10,7 +10,7 @@ options(scipen=999)
 ### individual fish are identified by PIT tag number
 ### columns preceded by "tag_" indicate initial mark data
 ### columns preceded by "rc_" indicate recapture data
-dat_rc <- readRDS("dat_rc.rds")
+dat_rc <- read.csv("dat_rc.csv")
 rownames(dat_rc) <- c()
 
 # restrict mark-recapture data set to fish tagged at the RST (freshwater exit)
@@ -66,11 +66,11 @@ days_qr75$tag_length <- length_vals # append length values to data frame
 
 # SAVE BEST-FIT MODEL AND MODEL PREDICTIONS ####
 saveRDS(mod_qr75, "mod_res_qr.rds")
-saveRDS(days_qr75, "days_res_qr.rds")
+write.csv(days_qr75, "days_res_qr.csv")
 
 # FIGURE S1 - PANEL B: ESTUARY RESIDENCE (QUANTILE REGRESSION) ####
 # load recapture data
-dat_rc <- readRDS("dat_rc.rds")
+dat_rc <- read.csv("dat_rc.csv")
 dat_rc <- subset(dat_rc, tag_loc == "smolt trap") # keep only fish tagged at the RST
 
 # establish plot inputs
